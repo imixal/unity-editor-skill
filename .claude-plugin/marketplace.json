@@ -1,0 +1,19 @@
+{
+  "name": "unity-skills",
+  "owner": {
+    "name": "imixal",
+    "email": "admin@hostailegames.us",
+    "url": "https://github.com/imixal"
+  },
+  "plugins": [
+    {
+      "name": "unity-editor",
+      "source": "./plugins/unity-editor",
+      "description": "Drive a running Unity Editor from the terminal: eval C#, run tests, read console, recompile, edit scenes/prefabs/assets — with battle-tested guardrails.",
+      "version": "1.0.0",
+      "author": { "name": "imixal" },
+      "repository": "https://github.com/imixal/unity-editor-skill",
+      "license": "MIT"
+    }
+  ]
+}

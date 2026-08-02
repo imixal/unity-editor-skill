@@ -1,0 +1,15 @@
+{
+  "name": "unity-editor",
+  "displayName": "Unity Editor",
+  "description": "Drive a running Unity Editor from the terminal: eval C#, run tests, read console, recompile, edit scenes/prefabs/assets — with battle-tested guardrails distilled from real sessions.",
+  "version": "1.0.0",
+  "author": {
+    "name": "imixal",
+    "email": "admin@hostailegames.us",
+    "url": "https://github.com/imixal"
+  },
+  "repository": "https://github.com/imixal/unity-editor-skill",
+  "license": "MIT",
+  "keywords": ["unity", "unity-editor", "gamedev", "tests", "csharp", "skill"],
+  "skills": ["./skills/"]
+}
