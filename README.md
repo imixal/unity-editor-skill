@@ -18,6 +18,20 @@ plugins/unity-editor/skills/unity-editor/
     └── gen-tools-md.sh   # regenerate references/tools.md after package upgrades
 ```
 
+## Why this instead of an MCP server?
+
+Most terminal-to-Unity bridges (unity-mcp and friends) expose the Editor as an MCP server. This skill takes a different route — plain CLI + instructions — and that buys real advantages:
+
+**No server, no per-client config.** An MCP setup means keeping a bridge process alive and registering it in every client (Claude Code, Cursor, each with its own config). Here the transport is one CLI binary; install the skill folder and any client that can run shell commands works — including CI.
+
+**No context tax.** An MCP server loads its tool schemas into the agent's context up front, every session — with 140 Editor tools that's a lot of tokens spent before the first request. The skill lists tools in `references/tools.md`; the agent reads only what it needs, when it needs it.
+
+**Operational knowledge, not just plumbing.** A protocol gives you tool calls; it can't tell the agent that `recompile_status: completed` sometimes lies while the broken assembly's old DLL stays loaded, that a `Total: 0` test run is never a pass, that `SaveAsPrefabAsset` flattens a prefab variant, or that a timed-out call may have finished its work. All of that came out of real sessions, and it's encoded in SKILL.md — plus `uh-build.sh` and `uh-suite.sh`, which make the two most error-prone workflows deterministic scripts instead of re-improvised tool sequences.
+
+**Right Editor, guaranteed.** The guard script resolves the Editor instance from the repo owning your CWD and refuses everything else. A port-bound MCP bridge will happily send commands into whichever project it's connected to — including the wrong one.
+
+**Composable in the shell.** CLI calls pipe into `grep`/`python3`/`timeout`, run in loops, background jobs, and CI — things a tool-call interface can't naturally express.
+
 ## Requirements
 
 - macOS or Linux, `python3`, `git`
